@@ -1,0 +1,20 @@
+[build-system]
+requires = ["uv_build>=0.11.7"]
+build-backend = "uv_build"
+
+[project]
+name = "ntrip-to-serial"
+version = "0.1.0"
+description = "Forward RTCM3 data from an NTRIP server to a serial port via MAVLink GPS_RTCM_DATA messages"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.0",
+    "rich>=13.0",
+    "pyrtcm>=1.0",
+    "pymavlink>=2.4",
+    "pyserial>=3.5",
+]
+
+[project.scripts]
+ntrip-to-serial = "ntrip_to_serial.cli:main"
