@@ -67,7 +67,7 @@ def _status_table(
 )
 @click.option(
     "--component-id",
-    default=0,
+    default=190,
     show_default=True,
     help="MAVLink source component ID.",
 )
