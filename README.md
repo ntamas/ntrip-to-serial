@@ -34,8 +34,9 @@ ntrip-to-serial --host <caster> --mountpoint <MOUNT> --serial-port <device>
 | `--serial-port` | *(required)* | Serial device (e.g. `/dev/ttyUSB0`) |
 | `--baud-rate` | `115200` | Serial baud rate |
 | `--system-id` | `255` | MAVLink source system ID |
-| `--component-id` | `0` | MAVLink source component ID |
+| `--component-id` | `190` | MAVLink source component ID |
 | `-v, --verbose` | — | Print each RTCM message type |
+| `--burst-delay` | `0.0` | Delay in seconds between consecutive MAVLink frames in the same burst. Only applied when the frame payload exceeds 100 bytes. |
 
 ### Examples
 
