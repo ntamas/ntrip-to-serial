@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import signal
 import sys
+import time
 from itertools import count
 from typing import Optional
 
@@ -72,6 +73,16 @@ def _status_table(
     help="MAVLink source component ID.",
 )
 @click.option("-v", "--verbose", is_flag=True, help="Print each RTCM message type.")
+@click.option(
+    "--burst-delay",
+    default=0.0,
+    show_default=True,
+    type=float,
+    help=(
+        "Delay in seconds between consecutive MAVLink frames in the same burst. "
+        "Only applied when the frame payload exceeds 100 bytes."
+    ),
+)
 def main(
     host: str,
     port: int,
@@ -83,6 +94,7 @@ def main(
     system_id: int,
     component_id: int,
     verbose: bool,
+    burst_delay: float,
 ) -> None:
     """Forward RTCM3 corrections from an NTRIP server to a serial port.
 
@@ -184,7 +196,9 @@ def main(
                         console.print(f"[yellow]Skipping oversized packet:[/yellow] {exc}")
                     continue
 
-                for msg in mavlink_msgs:
+                for i, msg in enumerate(mavlink_msgs):
+                    if i > 0 and burst_delay > 0.0 and msg.len > 100:
+                        time.sleep(burst_delay)
                     writer.send(msg)
                     messages += 1
 
