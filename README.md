@@ -6,20 +6,16 @@ can then inject the corrections directly into its GNSS receiver.
 
 ## Installation
 
-```
-pip install ntrip-to-serial
-```
-
-Or with [uv](https://github.com/astral-sh/uv):
+Clone the source tree and run
 
 ```
-uv tool install ntrip-to-serial
+uv sync
 ```
 
 ## Usage
 
 ```
-ntrip-to-serial --host <caster> --mountpoint <MOUNT> --serial-port <device>
+uv run ntrip-to-serial --host <caster> --mountpoint <MOUNT> --serial-port <device>
 ```
 
 ### Options
